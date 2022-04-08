@@ -1,10 +1,19 @@
-import random, time
+import random, time, sys
 import tabulate
 
+sys.setrecursionlimit(10000)
 
 def qsort(a, pivot_fn):
-    ## TO DO
-    pass
+    if len(a) == 0:
+      return a
+    else:
+      p = pivot_fn(a)
+      l = list(filter(lambda e: e < p, a))
+      m = list(filter(lambda e: e == p, a))
+      h = list(filter(lambda e: e > p, a))
+      q1, q2 = qsort(l, pivot_fn), qsort(h, pivot_fn)
+      return q1 + m + q2
+      
     
 def time_search(sort_fn, mylist):
     """
@@ -29,7 +38,7 @@ def time_search(sort_fn, mylist):
     return (time.time() - start) * 1000
     ###
 
-def compare_sort(sizes=[100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000]):
+def compare_sort(sizes=[25, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000]):
     """
     Compare the running time of different sorting algorithms.
 
@@ -40,9 +49,9 @@ def compare_sort(sizes=[100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 10
       for each method to run on each value of n
     """
     ### TODO - sorting algorithms for comparison
-    qsort_fixed_pivot = # 
-    qsort_random_pivot = #
-    tim_sort = #
+    qsort_fixed_pivot = lambda a: qsort(a, lambda a: a[0])
+    qsort_random_pivot = lambda a: qsort(a, lambda a: random.choice(a))
+    tim_sort = sorted 
     result = []
     for size in sizes:
         # create list in ascending order
@@ -67,5 +76,5 @@ def print_results(results):
 def test_print():
     print_results(compare_sort())
 
-random.seed()
+#random.seed()
 test_print()
