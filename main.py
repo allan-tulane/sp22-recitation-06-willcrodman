@@ -1,7 +1,7 @@
 import random, time, sys
 import tabulate
 
-sys.setrecursionlimit(10000)
+sys.setrecursionlimit(100000)
 
 def qsort(a, pivot_fn):
     if len(a) == 0:
